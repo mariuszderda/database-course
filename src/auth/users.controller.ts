@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from '../../schemas/user.schema';
 import { AuthService } from './auth.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto, UserProfileDto } from './dto/create-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -13,7 +13,7 @@ export class UsersController {
   ) {}
 
   @Post()
-  async create(@Body() createUserDto: CreateUserDto) {
+  async create(@Body() createUserDto: CreateUserDto): Promise<UserProfileDto> {
     const user = new this.userModel(createUserDto);
 
     if (createUserDto.password !== createUserDto.retypedPassword) {
@@ -21,8 +21,10 @@ export class UsersController {
     }
 
     const existingUser = await this.userModel.findOne({
-      email: createUserDto.email,
-      username: createUserDto.username,
+      $or: [
+        { email: createUserDto.email },
+        { username: createUserDto.username },
+      ],
     });
     if (existingUser) {
       throw new BadRequestException([
@@ -36,9 +38,10 @@ export class UsersController {
     user.lastName = createUserDto.lastName;
 
     await user.save();
+    const { password, ...result } = user.toObject();
 
     return {
-      ...(await user.save()).toObject(),
+      ...result,
       token: this.authService.getTokenForUser(user),
     };
   }

@@ -9,7 +9,7 @@ export class AuthService {
 
   public getTokenForUser(user: UserDocument): string {
     return this.jwtService.sign({
-      username: user.username,
+      email: user.email,
       sub: user._id,
     });
   }

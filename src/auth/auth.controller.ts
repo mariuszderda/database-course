@@ -1,5 +1,4 @@
-import { Controller, Post, UseGuards, Get } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { Controller, Post, UseGuards, Get, Body } from '@nestjs/common';
 import { CurrentUser } from '../../decorators/current-user.decorator';
 import { UserDocument } from '../../schemas/user.schema';
 import { AuthGuardJwt } from './auth-guard.jwt';
@@ -22,6 +21,7 @@ export class AuthController {
   @Get('profile')
   @UseGuards(AuthGuardJwt)
   async getProfile(@CurrentUser() user: UserDocument) {
-    return user;
+    const { password, ...data } = user.toObject();
+    return data;
   }
 }

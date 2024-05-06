@@ -25,3 +25,13 @@ export class CreateUserDto {
   @Length(3, 50)
   lastName: string;
 }
+
+export class UserProfileDto extends PickType(CreateUserDto, [
+  'username',
+  'lastName',
+  'firstName',
+  'email',
+] as const) {
+  @IsString()
+  token: string;
+}

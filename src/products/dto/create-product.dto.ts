@@ -3,16 +3,16 @@ import {
   IsNumber,
   IsOptional,
   IsString,
-  MaxLength,
+  Length,
 } from 'class-validator';
 
 export class CreateProductDto {
   @IsString()
-  @MaxLength(100)
+  @Length(5, 100)
   name: string;
 
   @IsString()
-  @MaxLength(50)
+  @Length(3, 50)
   reference: string;
 
   @IsNumber({ maxDecimalPlaces: 2 })
@@ -28,7 +28,7 @@ export class CreateProductDto {
   category?: string;
 
   @IsString()
-  @MaxLength(50)
+  @Length(5, 50)
   createdBy: string;
 
   @IsDate()
