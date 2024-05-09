@@ -8,6 +8,7 @@ import {
   Post,
   Put,
   UseGuards,
+  Request,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -25,8 +26,12 @@ export class ProductsController {
   @Post()
   @UsePipes(new ValidationPipe())
   @UseGuards(AuthGuardJwt)
-  create(@Body() createProductDto: CreateProductDto) {
-    return this.productService.createProduct(createProductDto);
+  create(@Request() req, @Body() createProductDto: CreateProductDto) {
+    const { _id, username, email } = req.user;
+
+    const user = { _id, username, email };
+
+    return this.productService.createProduct(user, createProductDto);
   }
 
   @Get()

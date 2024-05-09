@@ -1,6 +1,7 @@
 import {
   IsDate,
   IsNumber,
+  IsObject,
   IsOptional,
   IsString,
   Length,
@@ -26,10 +27,6 @@ export class CreateProductDto {
   @IsString()
   @IsOptional()
   category?: string;
-
-  @IsString()
-  @Length(5, 50)
-  createdBy: string;
 
   @IsDate()
   @IsOptional()
