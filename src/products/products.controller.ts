@@ -8,11 +8,13 @@ import {
   Post,
   Put,
   UseGuards,
-  Request,
-  UsePipes,
-  ValidationPipe,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import mongoose from 'mongoose';
+import { CurrentUser } from '../../decorators/current-user.decorator';
+import { UserDocument } from '../../schemas/user.schema';
 import { AuthGuardJwt } from '../auth/auth-guard.jwt';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -22,15 +24,16 @@ import { ProductsService } from './products.service';
 export class ProductsController {
   constructor(private productService: ProductsService) {}
 
-  //. create product route
+  // @UsePipes(new ValidationPipe())
   @Post()
-  @UsePipes(new ValidationPipe())
   @UseGuards(AuthGuardJwt)
-  create(@Request() req, @Body() createProductDto: CreateProductDto) {
-    const { _id, username, email } = req.user;
-
-    const user = { _id, username, email };
-
+  @UseInterceptors(FileInterceptor('image'))
+  create(
+    // TODO: create file upload to cloudinary
+    @UploadedFile() file,
+    @CurrentUser() user: UserDocument,
+    @Body() createProductDto: CreateProductDto,
+  ) {
     return this.productService.createProduct(user, createProductDto);
   }
 

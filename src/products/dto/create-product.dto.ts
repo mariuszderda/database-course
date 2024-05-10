@@ -18,6 +18,7 @@ export class CreateProductDto {
 
   @IsNumber({ maxDecimalPlaces: 2 })
   price: number;
+
   @IsNumber()
   quantity: number;
 

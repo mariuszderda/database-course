@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { now } from 'mongoose';
-import { ProductCreator } from '../interfaces';
+import mongoose, { mongo, now } from 'mongoose';
+import { CreatorField } from '../interfaces';
 
 @Schema({ timestamps: true })
 export class Product {
@@ -25,12 +25,12 @@ export class Product {
   @Prop({
     required: true,
     type: {
-      _id: { required: true, type: String },
+      _id: { required: true, type: mongoose.Schema.ObjectId },
       username: { required: true, type: String },
       email: { required: true, type: String },
     },
   })
-  createdBy: ProductCreator;
+  createdBy: CreatorField;
 
   @Prop({ default: now(), required: false })
   createdAt?: Date;
