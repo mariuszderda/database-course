@@ -1,7 +1,6 @@
 import {
   IsDate,
   IsNumber,
-  IsObject,
   IsOptional,
   IsString,
   Length,
@@ -20,7 +19,7 @@ export class CreateProductDto {
   price: number;
 
   @IsNumber()
-  quantity: number;
+  stock: number;
 
   @IsString()
   description: string;

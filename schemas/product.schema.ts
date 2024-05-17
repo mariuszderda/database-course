@@ -14,7 +14,7 @@ export class Product {
   price: number;
 
   @Prop({ required: true })
-  quantity: number;
+  stock: number;
 
   @Prop({ required: true, index: true })
   description: string;
