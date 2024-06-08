@@ -9,7 +9,7 @@ import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
 
 @Injectable()
-export class CartService {
+export class CartsService {
   constructor(
     @InjectModel(Cart.name) private readonly cartModel: Model<CartDocument>,
     @InjectModel(Product.name) private readonly productModel: Model<Product>,

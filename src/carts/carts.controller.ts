@@ -8,16 +8,15 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuardJwt } from '../auth/auth-guard.jwt';
-import { CartService } from './cart.service';
+import { CartsService } from './carts.service';
 import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
 
-@Controller('cart')
-export class CartController {
-  constructor(private readonly cartService: CartService) {}
+@Controller('carts')
+export class CartsController {
+  constructor(private readonly cartService: CartsService) {}
 
   @Post()
-  @UseGuards(AuthGuardJwt)
   create(@Body() createCartDto: CreateCartDto) {
     return this.cartService.create(createCartDto);
   }

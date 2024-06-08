@@ -1,13 +1,20 @@
-import { Module } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-import { ProductsModule } from './products/products.module';
+import { CartsModule } from './carts/carts.module';
 import { CategoriesModule } from './categories/categories.module';
-import { CartModule } from './cart/cart.module';
-import { OrderModule } from './order/order.module';
+import { CheckedIdMiddleware } from './checkedId.middleware';
+import { OrderModule } from './orders/order.module';
+import { PaymentsModule } from './payments/payments.module';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -16,10 +23,21 @@ import { OrderModule } from './order/order.module';
     AuthModule,
     ProductsModule,
     CategoriesModule,
-    CartModule,
+    CartsModule,
     OrderModule,
+    PaymentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer): any {
+    consumer
+      .apply(CheckedIdMiddleware)
+      .exclude({
+        path: '*',
+        method: RequestMethod.GET,
+      })
+      .forRoutes('*');
+  }
+}

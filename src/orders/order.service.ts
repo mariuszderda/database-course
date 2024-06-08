@@ -10,7 +10,7 @@ export class OrderService {
   constructor(@InjectModel(Order.name) private orderModel: Model<Order>) {}
 
   create(createOrderDto: CreateOrderDto) {
-    return 'This action adds a new order';
+    return 'This action adds a new orders';
   }
 
   findAll() {
