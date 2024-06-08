@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { PassportStrategy } from '@nestjs/passport';
 import { Model } from 'mongoose';
 import { Strategy } from 'passport-local';
-import { User, UserDocument } from '../../schemas/user.schema';
+import { User, UserDocument } from './schema/user.schema';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()

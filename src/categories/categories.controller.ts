@@ -7,12 +7,11 @@ import {
   Param,
   Delete,
   UsePipes,
-  Request,
   ValidationPipe,
   UseGuards,
 } from '@nestjs/common';
 import { CurrentUser } from '../../decorators/current-user.decorator';
-import { CreatorField } from '../../interfaces';
+import { CreatorField } from '../../types';
 import { AuthGuardJwt } from '../auth/auth-guard.jwt';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';

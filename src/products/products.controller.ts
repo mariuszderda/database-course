@@ -14,7 +14,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import mongoose from 'mongoose';
 import { CurrentUser } from '../../decorators/current-user.decorator';
-import { UserDocument } from '../../schemas/user.schema';
+import { UserDocument } from '../auth/schema/user.schema';
 import { AuthGuardJwt } from '../auth/auth-guard.jwt';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';

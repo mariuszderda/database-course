@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreatorField } from '../../interfaces';
-import { Category } from '../../schemas/category.schema';
+import { CreatorField } from '../../types';
+import { Category } from './schema/category.schema';
 import { validId } from '../../utils';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';

@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { now } from 'mongoose';
-import { CreatorField } from '../interfaces';
+import { CreatorField } from '../../../types';
 
 @Schema({ timestamps: true })
 export class Category {

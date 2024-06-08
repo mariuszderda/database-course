@@ -1,9 +1,9 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CartType, ProductInCartType, ProductType } from '../../interfaces';
-import { Cart, CartDocument } from '../../schemas/cart.schema';
-import { Product } from '../../schemas/product.schema';
+import { CartType, ProductInCartType, ProductType } from '../../types';
+import { Cart, CartDocument } from './schema/cart.schema';
+import { Product } from '../products/schema/product.schema';
 import { validId } from '../../utils';
 import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
@@ -85,17 +85,11 @@ export class CartService {
       return (total += item.price * item.quantity);
     }, 0);
     // const totalCost = allItems.reduce(() => {}, 0);
-
-    const updatedCart = await this.cartModel.findOneAndUpdate(
+    console.timeEnd('UPDATE');
+    return this.cartModel.findOneAndUpdate(
       { _id: id },
       { items: allItems, totalCost },
       { new: true },
     );
-    console.log(updatedCart);
-    //! repalce new cart
-
-    // await currentCart.save();
-    console.timeEnd('UPDATE');
-    return updatedCart;
   }
 }

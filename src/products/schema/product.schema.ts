@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { mongo, now } from 'mongoose';
-import { CreatorField } from '../interfaces';
+import mongoose, { now } from 'mongoose';
+import { CreatorField } from '../../../types';
 
 @Schema({ timestamps: true })
 export class Product {

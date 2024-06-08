@@ -1,7 +1,8 @@
-import { IsArray } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 export class CreateCartDto {
-  @IsArray()
+  @IsString()
   _id: string;
+  @IsNumber()
   quantity: number;
 }

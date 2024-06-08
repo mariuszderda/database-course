@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { now } from 'mongoose';
-import { CartType } from '../interfaces';
+import { CartType } from '../../../types';
 
 export type CartDocument = Cart & mongoose.Document;
 
