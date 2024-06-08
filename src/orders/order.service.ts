@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Order } from './schema/order.schema';
@@ -9,11 +9,16 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 export class OrderService {
   constructor(@InjectModel(Order.name) private orderModel: Model<Order>) {}
 
-  create(createOrderDto: CreateOrderDto) {
-    return 'This action adds a new orders';
+  async create(createOrderDto: CreateOrderDto) {
+    try {
+      const order = await this.orderModel.create(createOrderDto);
+      return order.save();
+    } catch (e) {
+      throw new HttpException(e.message, HttpStatus.NOT_FOUND);
+    }
   }
 
-  findAll() {
+  async findAll() {
     return this.orderModel.find({});
   }
 
@@ -22,10 +27,20 @@ export class OrderService {
   }
 
   async update(id: string, updateOrderDto: UpdateOrderDto) {
-    return `This action updates a #${id} order`;
+    try {
+      return this.orderModel.findByIdAndUpdate(id, updateOrderDto, {
+        new: true,
+      });
+    } catch (e) {
+      throw new HttpException(e.message, HttpStatus.NOT_FOUND);
+    }
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} order`;
+  async remove(id: string) {
+    try {
+      this.orderModel.findOneAndDelete({ _id: id });
+    } catch (e) {
+      throw new HttpException(e.message, HttpStatus.NOT_FOUND);
+    }
   }
 }

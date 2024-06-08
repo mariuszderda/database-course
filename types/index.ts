@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import * as stream from 'node:stream';
 export type CreatorField = {
   _id: mongoose.ObjectId;
   username: string;
@@ -32,4 +33,17 @@ export type CartType = {
   items: ProductInCartType[];
   createdAt?: Date;
   updatedAt?: Date;
+};
+
+export type DeliveryType = {
+  street_and_number: string;
+  city: string;
+  zip_code: string;
+};
+
+export type OrderCustomerType = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  telephone: string;
 };
