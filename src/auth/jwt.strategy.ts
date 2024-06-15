@@ -8,6 +8,7 @@ import { User, UserDocument } from './schema/user.schema';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {
+    console.log(ExtractJwt.fromAuthHeaderAsBearerToken());
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,

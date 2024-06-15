@@ -20,7 +20,7 @@ import { UsersController } from './users.controller';
       useFactory: () => ({
         secret: process.env.AUTH_SECRET,
         signOptions: {
-          expiresIn: '60m',
+          expiresIn: `${30 * 24 * 60 * 60}s`, // 30 days
         },
       }),
     }),
