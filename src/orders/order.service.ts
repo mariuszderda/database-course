@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Order } from './schema/order.schema';
+import { Order, OrderStatusEnum } from './schema/order.schema';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 
@@ -12,6 +12,9 @@ export class OrderService {
   async create(createOrderDto: CreateOrderDto) {
     try {
       const order = await this.orderModel.create(createOrderDto);
+      order.amount = order.items.reduce((total, curr) => {
+        return (total += curr.price * curr.quantity);
+      }, 0);
       return order.save();
     } catch (e) {
       throw new HttpException(e.message, HttpStatus.NOT_FOUND);

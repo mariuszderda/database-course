@@ -9,11 +9,11 @@ import { DeliveryType } from '../../../types';
 
 export class CreateCustomerDto {
   @IsString()
-  @MaxLength(255)
+  @MaxLength(50)
   first_name: string;
 
   @IsString()
-  @MaxLength(255)
+  @MaxLength(50)
   last_name: string;
 
   @IsEmail()

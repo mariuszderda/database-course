@@ -6,7 +6,7 @@ import {
   ProductInCartType,
 } from '../../../types';
 
-enum OrderStatusEnum {
+export enum OrderStatusEnum {
   created = 'created',
   payment_accepted = 'payment_accepted',
   in_delivered = 'in_delivered',
@@ -28,13 +28,13 @@ export class Order {
   @Prop({ required: true })
   payment_method: string;
 
-  @Prop({ required: true, type: String })
-  status: {
-    enum: OrderStatusEnum;
-    default: OrderStatusEnum.created;
-  };
-
   @Prop({ required: true })
+  delivery_method: string;
+
+  @Prop({ required: true, type: String })
+  status: OrderStatusEnum;
+
+  @Prop()
   amount: number;
 
   @Prop({ default: now(), required: false })

@@ -6,6 +6,6 @@ export class CreateCategoryDto {
   name: string;
 
   @IsString()
-  @Length(30, 500)
+  @Length(10, 500, { message: 'Description must be between 10 and 500 sign.' })
   description: string;
 }

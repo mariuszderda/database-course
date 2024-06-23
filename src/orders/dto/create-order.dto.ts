@@ -1,10 +1,4 @@
-import {
-  IsArray,
-  IsNumber,
-  IsObject,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsArray, IsObject, IsOptional, IsString } from 'class-validator';
 import {
   DeliveryType,
   OrderCustomerType,
@@ -25,6 +19,6 @@ export class CreateOrderDto {
   @IsString()
   payment_method: string;
 
-  @IsNumber({ maxDecimalPlaces: 2 })
-  amount: number;
+  @IsString()
+  delivery_method: string;
 }

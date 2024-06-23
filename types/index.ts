@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import * as stream from 'node:stream';
 export type CreatorField = {
   _id: mongoose.ObjectId;
   username: string;
