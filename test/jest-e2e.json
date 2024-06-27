@@ -1,9 +1,8 @@
 {
-  "moduleFileExtensions": ["js", "json", "ts"],
-  "rootDir": ".",
-  "testEnvironment": "node",
-  "testRegex": ".e2e-spec.ts$",
-  "transform": {
-    "^.+\\.(t|j)s$": "ts-jest"
-  }
+  "username": "Mariusz",
+  "password": "Ak4*3m*a",
+  "retypedPassword": "Password",
+  "email": "adrian.derda@gmail.com",
+  "firstName": "Adrian",
+  "lastName": "Derda"
 }

@@ -11,6 +11,7 @@ import { PaymentsModule } from './payments/payments.module';
 import { ProductsModule } from './products/products.module';
 import { DeliveryModule } from './delivery/delivery.module';
 import { CustomersModule } from './customers/customers.module';
+import { StatisticModule } from './statistic/statistic.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { CustomersModule } from './customers/customers.module';
     PaymentsModule,
     DeliveryModule,
     CustomersModule,
+    StatisticModule,
   ],
   controllers: [AppController],
   providers: [AppService],

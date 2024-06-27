@@ -27,10 +27,7 @@ export class ProductsController {
   // @UsePipes(new ValidationPipe())
   @Post()
   @UseGuards(AuthGuardJwt)
-  @UseInterceptors(FileInterceptor('image'))
   create(
-    // TODO: create file upload to cloudinary
-    @UploadedFile() file,
     @CurrentUser() user: UserDocument,
     @Body() createProductDto: CreateProductDto,
   ) {

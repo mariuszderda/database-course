@@ -22,7 +22,7 @@ export class OrderService {
   }
 
   async findAll() {
-    return this.orderModel.find({});
+    return this.orderModel.find().sort({ createdAt: -1 }).exec();
   }
 
   async findOne(id: string) {

@@ -1,24 +1,9 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
-
-describe('AppController (e2e)', () => {
-  let app: INestApplication;
-
-  beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
-
-    app = moduleFixture.createNestApplication();
-    await app.init();
-  });
-
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
-  });
-});
+const user = {
+  username: 'Mariusz',
+  password: '$2b$10$sN2rxPArGG.zvHHVq099Kein0FL4kGDrwQTQdPo5SFs3rQI4kGiLG',
+  retypedPassword:
+    '$2b$10$sN2rxPArGG.zvHHVq099Kein0FL4kGDrwQTQdPo5SFs3rQI4kGiLG',
+  email: 'derda.mariusz.ag@gmail.com',
+  firstName: 'Mariusz',
+  lastName: 'Derda',
+};
